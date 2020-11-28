@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+
+    <style>
+      body{
+    background-color: aqua;
+    font: normal 15pt Arial;
+}
+
+header{
+    text-align: center;
+    color: black;
+}
+
+section{
+    background-color: white;
+    margin: auto;
+    padding: 15px;
+    width: 500px;
+    box-shadow: 5px 5px 10px black;
+    border-radius: 10px;
+}
+
+select#list{
+    width: 200px;
+}
+
+footer{
+    text-align: center;
+    font-size: large;
+    font-style: italic;
+    color: white;
+}
+    </style>
+    
+</head>
+
+<body>
+    <header>
+        <h1>Meu Teste - Vetor</h1>
+    </header>
+    <section>
+        <p>
+            <input type="number" id="num">
+            <input type="button" value="Click here" onclick="inserir()">
+            <input type="button" value="Limpar" onclick="limpar()">
+        </p>
+        <p>
+            <select id="list" size="8"></select>
+        </p>
+        <p>
+            <input type="button" value="Show Results" onclick="show()">
+        </p>
+        <div id="res"></div>
+    </section>
+    <footer>
+        <p>
+            &copy; RODAPE
+        </p>
+    </footer>
+
+    <script>
+      var num = document.querySelector('input#num')
+var list = document.querySelector('select#list')
+var vetor = []
+var res = document.querySelector('div#res')
+
+//checar se valor ja foi inserido
+function checar(v, vet){
+    if(vet.indexOf(v) != -1)
+        return true
+    else
+        return false
+}
+
+function inserir(){
+    if(num.value.length != 0){
+        if(checar(num.value,vetor))
+            alert('Valor ja inserido no vetor')
+        else{
+            vetor.push(num.value)
+            var item = document.createElement('option')
+            item.text = `Vetor [${vetor.indexOf(num.value)}] = ${num.value}`
+            list.appendChild(item)
+            num.value = ''
+            num.focus();
+        }    
+        
+    } else
+        alert('Por favor, insira um numero')            
+}
+
+function show(){
+    if(res.innerHTML.length == 0){
+        if(vetor.length == 0)
+            alert('Vetor vazio')
+        else {
+        for(var i in vetor)
+            res.innerHTML += `Posicao [${i}] = ${vetor[i]}<br>`
+        }
+    } else {
+        res.innerHTML = ''
+    }
+}
+
+function limpar(){
+    res.innerHTML = ''
+    vetor.length = 0
+    list.innerHTML = ''
+    num.value = ''
+    num.focus()
+}
+
+    </script>
+    
+</body>
+
+</html>
